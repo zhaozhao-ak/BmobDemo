@@ -21,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zz.ak.demo.BaseActivity;
-import com.zz.ak.demo.MainActivity;
 import com.zz.ak.demo.R;
 import com.zz.ak.demo.view.DrawableTextView;
 import com.zz.ak.demo.view.KeyboardWatcher;
@@ -129,7 +128,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 public void onNext(BmobUser bmobUser) {
                     closeloading();
                     toast(bmobUser.getUsername() + "登陆成功");
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, TimelineActivity.class);
                     startActivity(intent);
                 }
             });
