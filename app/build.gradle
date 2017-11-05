@@ -3,8 +3,8 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.zz.ak.dd"
-        minSdkVersion 15
+        applicationId "com.zz.ak.demo"
+        minSdkVersion 18
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -16,6 +16,29 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    sourceSets {
+        main.jniLibs.srcDirs = ['libs']
+    }
+
+    buildscript {
+        repositories {
+            jcenter()
+        }
+        dependencies {
+            classpath     'com.android.tools.build:gradle:1.2.3'
+        }
+    }
+
+    allprojects {
+        repositories {
+            jcenter()
+            //Bmob的maven仓库地址--必填
+            maven { url "https://raw.github.com/bmob/bmob-android-sdk/master" }
+        }
+    }
+
+
 }
 
 dependencies {
@@ -25,4 +48,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    compile 'cn.bmob.android:bmob-sdk:3.5.0'
+    compile 'com.android.support:cardview-v7:26.1.0'
 }
