@@ -42,5 +42,25 @@
         <item name="android:backgroundDimAmount">0.6</item><!--背景的灰度-->
     </style>
 
+    <declare-styleable name="TabContainerViewStyle">
+        <attr name="tabTextSize" format="dimension" />
+        <attr name="tabTextColor" format="color" />
+        <attr name="selectedTextColor" format="color" />
+        <attr name="drawablePadding" format="dimension" />
+        <attr name="iconHeight" format="dimension" />
+        <attr name="iconWidth" format="dimension" />
+        <attr name="divideLineColor" format="color" />
+        <attr name="divideLineHeight" format="dimension" />
+    </declare-styleable>
+
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

@@ -37,6 +37,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.TimelineActivity"/>
+
+        <activity android:name=".ui.MActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

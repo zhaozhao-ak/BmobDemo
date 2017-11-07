@@ -128,7 +128,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 public void onNext(BmobUser bmobUser) {
                     closeloading();
                     toast(bmobUser.getUsername() + "登陆成功");
-                    Intent intent = new Intent(LoginActivity.this, TimelineActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, MActivity.class);
                     startActivity(intent);
                 }
             });

@@ -1,7 +1,7 @@
 package com.zz.ak.demo;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.BaseAdapter;
@@ -18,7 +18,7 @@ import cn.bmob.v3.exception.BmobException;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
-public class BaseActivity extends Activity {
+public class BaseActivity extends AppCompatActivity {
 
     public static String TAG = "zhao--BaseActivity";
     protected ListView mListview;
