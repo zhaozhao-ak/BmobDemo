@@ -36,5 +36,10 @@ public class BmobApplication extends Application {
         Bmob.initialize(this, APPID);
     }
 
+    public void getAllPerson(){
+
+
+    }
+
 
 }

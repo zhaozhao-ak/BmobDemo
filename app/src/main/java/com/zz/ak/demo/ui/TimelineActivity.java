@@ -6,18 +6,14 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Toast;
 
+import com.zz.ak.demo.BaseActivity;
 import com.zz.ak.demo.R;
+import com.zz.ak.demo.bean.Person;
+import com.zz.ak.demo.interfaceview.TimeInterface;
+import com.zz.ak.demo.tool.QueryTool;
 import com.zz.ak.demo.view.timelinerow.TimelineRow;
-import com.zz.ak.demo.view.timelinerow.TimelineViewAdapter;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,12 +22,15 @@ import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class TimelineActivity extends AppCompatActivity {
+public class TimelineActivity extends BaseActivity implements TimeInterface {
 
     //Create Timeline Rows List
-    private ArrayList<TimelineRow> timelineRowsList = new ArrayList<>();
-    ArrayAdapter<TimelineRow> myAdapter;
+    private ArrayList<Person> personList = new ArrayList<>();
     private Context mContext;
+    private QueryTool queryTool;
+    private ListView myListView;
+    private TimeInterface timeInterface;
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -39,74 +38,52 @@ public class TimelineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline_test);
         mContext = this;
-
+        init();
+        //获取数据
+        getData();
         //填充数据
+        setData();
+
+    }
+
+
+
+    public void init() {
+        myListView = (ListView) findViewById(R.id.timeline_listView);
+        queryTool = new QueryTool(mContext,timeInterface);
+        timeInterface = new TimelineActivity();
+    }
+    //获取最新信息
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public void getData() {
+        showloading();
+        queryTool.queryObjects();
+
         for (int i = 0; i < 15; i++) {
             //add the new row to the list
-            timelineRowsList.add(createRandomTimelineRow(i));
         }
-
-        //Adapter true按日期排序
-        myAdapter = new TimelineViewAdapter(this, 0, timelineRowsList,true);
-
-        ListView myListView = (ListView) findViewById(R.id.timeline_listView);
-        myListView.setAdapter(myAdapter);
-        //if you wish to handle list scrolling
-        myListView.setOnScrollListener(new AbsListView.OnScrollListener() {
-            private int currentVisibleItemCount;
-            private int currentScrollState;
-            private int currentFirstVisibleItem;
-            private int totalItem;
-            private LinearLayout lBelow;
-
-
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-                // TODO Auto-generated method stub
-                this.currentScrollState = scrollState;
-                this.isScrollCompleted();
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem,
-                                 int visibleItemCount, int totalItemCount) {
-                // TODO Auto-generated method stub
-                this.currentFirstVisibleItem = firstVisibleItem;
-                this.currentVisibleItemCount = visibleItemCount;
-                this.totalItem = totalItemCount;
-
-
-            }
-
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-            private void isScrollCompleted() {
-                if (totalItem - currentFirstVisibleItem == currentVisibleItemCount
-                        && this.currentScrollState == SCROLL_STATE_IDLE) {
-
-                    ////on scrolling to end of the list, add new rows
-                    for (int i = 0; i < 15; i++) {
-                        myAdapter.add(createRandomTimelineRow(i));
-                    }
-
-                }
-            }
-
-
-        });
-
-        //item点击事件
-        AdapterView.OnItemClickListener adapterListener = new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TimelineRow row = timelineRowsList.get(position);
-                Toast.makeText(TimelineActivity.this, row.getTitle(), Toast.LENGTH_SHORT).show();
-            }
-        };
-        myListView.setOnItemClickListener(adapterListener);
 
 
     }
+    //查询到最新的数据
+    @Override
+    public void getNewData() {
+        setData();
+        closeloading();
+    }
+
+    //查询数据失败
+    @Override
+    public void getNewDataError() {
+
+    }
+
+
+    private void setData(){
+
+    }
+
+
 
     //绘制布局
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -171,5 +148,7 @@ public class TimelineActivity extends AppCompatActivity {
         }
         return endDate;
     }
+
+
 
 }

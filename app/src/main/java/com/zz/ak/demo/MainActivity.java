@@ -63,7 +63,7 @@ public class MainActivity extends BaseActivity {
     }
 
     public void getNewView() {
-        queryTool = new QueryTool();
+//        queryTool = new QueryTool();
     }
 
     private void viewOnClick() {
@@ -236,17 +236,17 @@ public class MainActivity extends BaseActivity {
         });
 
 
-        /**
-         * 获取所有用户信息
-         */
-        btn_getalluser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                queryTool.queryObjectsByTable();
-
-                queryTool.queryObjects();
-            }
-        });
+//        /**
+//         * 获取所有用户信息
+//         */
+//        btn_getalluser.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                queryTool.queryObjectsByTable();
+//
+//                queryTool.queryObjects();
+//            }
+//        });
 
 
     }

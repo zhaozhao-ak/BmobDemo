@@ -1,9 +1,11 @@
 package com.zz.ak.demo.tool;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.zz.ak.demo.BmobApplication;
 import com.zz.ak.demo.bean.Person;
+import com.zz.ak.demo.interfaceview.TimeInterface;
 
 import java.util.List;
 
@@ -19,7 +21,11 @@ public class QueryTool {
 
     public static String TAG = "zhao--QueryTool";
 
-    public QueryTool() {
+    private Context context;
+    private TimeInterface timeInterface;
+    public QueryTool(Context mContext, TimeInterface timeInterface) {
+        this.context = mContext;
+        this.timeInterface = timeInterface;
     }
 
     /**
@@ -47,6 +53,7 @@ public class QueryTool {
                         BmobApplication application = new BmobApplication();
                         application.personList = persons;
                         System.out.println("zhao--666------");
+                        timeInterface.getNewData();
                     }
                 });
     }
