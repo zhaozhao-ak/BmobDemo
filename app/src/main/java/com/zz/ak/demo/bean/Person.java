@@ -14,6 +14,8 @@ public class Person extends BmobObject {
 	private BmobFile pic;   //头像
 	private BmobDate uploadTime; //更新的最新时间
 
+	private String firstLetter;
+
 	public BmobDate getUploadTime() {
 		return uploadTime;
 	}
@@ -60,7 +62,12 @@ public class Person extends BmobObject {
 		this.pic = pic;
 	}
 
-
+	public String getFirstLetter() {
+		return firstLetter;
+	}
+	public void setFirstLetter(String firstLetter) {
+		this.firstLetter = firstLetter;
+	}
 
 
 

@@ -17,6 +17,10 @@ public class City {
         this.cityName = cityName;
     }
 
+
+    public String getFirstLetter() {
+        return firstLetter;
+    }
     public void setFirstLetter(String firstLetter) {
         this.firstLetter = firstLetter;
     }
@@ -25,7 +29,4 @@ public class City {
         return cityName;
     }
 
-    public String getFirstLetter() {
-        return firstLetter;
-    }
 }

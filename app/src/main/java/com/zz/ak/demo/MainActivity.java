@@ -1,5 +1,6 @@
 package com.zz.ak.demo;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +12,7 @@ import com.zz.ak.demo.bean.BankCard;
 import com.zz.ak.demo.bean.MyUser;
 import com.zz.ak.demo.bean.Person;
 import com.zz.ak.demo.bean.Users;
+import com.zz.ak.demo.interfaceview.TimeInterface;
 import com.zz.ak.demo.tool.QueryTool;
 
 import org.json.JSONArray;
@@ -29,7 +31,7 @@ import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 import rx.Subscriber;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements TimeInterface {
 
     private Button btn_add,btn_update,btn_delete,btn_query,
     login,SignUp,btn_getalluser,btn_LogOut,btn_getMyUser;
@@ -37,10 +39,13 @@ public class MainActivity extends BaseActivity {
     private TextView tv_msg;
     private int i = 1;
     private QueryTool queryTool;
+    private Context mContext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        mContext = this;
+        queryTool = new QueryTool(mContext,this);
         init();
         viewOnClick();
         //初始化数据
@@ -239,14 +244,13 @@ public class MainActivity extends BaseActivity {
 //        /**
 //         * 获取所有用户信息
 //         */
-//        btn_getalluser.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-////                queryTool.queryObjectsByTable();
-//
-//                queryTool.queryObjects();
-//            }
-//        });
+        btn_getalluser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                queryTool.queryObjects();
+            }
+        });
 
 
     }
@@ -398,4 +402,13 @@ public class MainActivity extends BaseActivity {
     }
 
 
+    @Override
+    public void getNewData() {
+
+    }
+
+    @Override
+    public void getNewDataError() {
+
+    }
 }

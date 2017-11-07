@@ -1,5 +1,6 @@
 package com.zz.ak.demo.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -15,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.zz.ak.demo.BaseActivity;
+import com.zz.ak.demo.MainActivity;
 import com.zz.ak.demo.R;
 import com.zz.ak.demo.tool.adapter.MainViewAdapter;
 import com.zz.ak.demo.tool.listener.OnTabSelectedListener;
@@ -92,7 +94,8 @@ public class MActivity extends BaseActivity implements NavigationView.OnNavigati
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent intent = new Intent(MActivity.this, MainActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
