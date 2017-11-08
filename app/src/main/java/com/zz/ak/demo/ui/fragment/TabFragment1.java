@@ -80,7 +80,7 @@ public class TabFragment1 extends BaseFragment implements OnQuickSideBarTouchLis
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        showloading();
+
     }
 
     @Override
@@ -99,6 +99,7 @@ public class TabFragment1 extends BaseFragment implements OnQuickSideBarTouchLis
 
     private void setData() {
         if (application.personList==null || application.personList.size()==0 ){
+            showloading();
             queryTool.queryAllPerson();
             queryTool.queryAllPersonMsg();
         }else {
