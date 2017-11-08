@@ -60,7 +60,7 @@ public class TextListAdapter extends RecyclerView.Adapter<TextListAdapter.TextHo
     public void onBindViewHolder(final TextHolder holder,final int position) {
         PersonMsg personMsg = personMsgList.get(position);
 //        holder.hend.setText(position+1+"");//设置头部的文字
-        holder.name.setText(personMsg.getPersonId());//设置名称
+        holder.name.setText(personMsg.getName());//设置名称
         int state=mTextStateList.get(position,STATE_UNKNOW);
 //      如果该itme是第一次初始化，则取获取文本的行数
         if (state==STATE_UNKNOW){
