@@ -90,15 +90,11 @@ public class TabFragment1 extends BaseFragment implements OnQuickSideBarTouchLis
     }
     private void setData(List<Person> personList) {
 
-//        //GSON解释出来
-//        Type listType = new TypeToken<LinkedList<Person>>(){}.getType();
-//        Gson gson = new Gson();
-//        LinkedList<Person> cities = gson.fromJson(DataConstants.cityDataList, listType);
         ArrayList<String> customLetters = new ArrayList<>();
 
         int position = 0;
         for(Person person: personList){
-            String letter = person.getName();
+            String letter = person.getFirstLetter();
             //如果没有这个key则加入并把位置也加入
             if(!letters.containsKey(letter)){
                 letters.put(letter,position);
