@@ -54,7 +54,7 @@ public abstract class CityListAdapter<VH extends RecyclerView.ViewHolder>
   }
 
   public Person getItem(int position) {
-    return items.get(position);
+    return items==null?null:items.get(position);
   }
 
   @Override

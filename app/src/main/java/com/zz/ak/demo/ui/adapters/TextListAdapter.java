@@ -39,9 +39,13 @@ public class TextListAdapter extends RecyclerView.Adapter<TextListAdapter.TextHo
     public TextListAdapter(Activity context,List<PersonMsg> personMsgs) {
         mContent = context;
         this.personMsgList = personMsgs;
+        mTextStateList = new SparseArray<>();
     }
 
     public void upData(List<PersonMsg> personMsgs){
+        if (this.personMsgList ==null){
+            this.personMsgList = new ArrayList<>();
+        }
         this.personMsgList.clear();
         this.personMsgList.addAll(personMsgs);
         notifyDataSetChanged();
@@ -54,10 +58,11 @@ public class TextListAdapter extends RecyclerView.Adapter<TextListAdapter.TextHo
 
     @Override
     public void onBindViewHolder(final TextHolder holder,final int position) {
+        PersonMsg personMsg = personMsgList.get(position);
 //        holder.hend.setText(position+1+"");//设置头部的文字
-//        holder.name.setText(Util.getName(position));//设置名称
+        holder.name.setText(personMsg.getPersonId());//设置名称
         int state=mTextStateList.get(position,STATE_UNKNOW);
-//    如果该itme是第一次初始化，则取获取文本的行数
+//      如果该itme是第一次初始化，则取获取文本的行数
         if (state==STATE_UNKNOW){
             holder.content.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
                 @Override
@@ -80,7 +85,7 @@ public class TextListAdapter extends RecyclerView.Adapter<TextListAdapter.TextHo
             });
 
             holder.content.setMaxLines(Integer.MAX_VALUE);//设置文本的最大行数，为整数的最大数值
-            holder.content.setText(R.string.msg);//用Util中的getContent方法获取内容
+            holder.content.setText(personMsg.getPersonMsg());//用Util中的getContent方法获取内容
         }else{
 //      如果之前已经初始化过了，则使用保存的状态，无需在获取一次
             switch (state){
@@ -98,7 +103,7 @@ public class TextListAdapter extends RecyclerView.Adapter<TextListAdapter.TextHo
                     holder.expandOrCollapse.setText("收起");
                     break;
             }
-            holder.content.setText(R.string.msg);
+            holder.content.setText(personMsg.getPersonMsg());
         }
 
 
