@@ -86,6 +86,7 @@ public class TextListAdapter extends RecyclerView.Adapter<TextListAdapter.TextHo
 
             holder.content.setMaxLines(Integer.MAX_VALUE);//设置文本的最大行数，为整数的最大数值
             holder.content.setText(personMsg.getPersonMsg());//用Util中的getContent方法获取内容
+
         }else{
 //      如果之前已经初始化过了，则使用保存的状态，无需在获取一次
             switch (state){
@@ -104,6 +105,10 @@ public class TextListAdapter extends RecyclerView.Adapter<TextListAdapter.TextHo
                     break;
             }
             holder.content.setText(personMsg.getPersonMsg());
+
+        }
+        if (personMsg.getUpdatedAt()!=null){
+            holder.time.setText(personMsg.getUpdatedAt());//设置时间
         }
 
 
@@ -136,15 +141,19 @@ public class TextListAdapter extends RecyclerView.Adapter<TextListAdapter.TextHo
         public ImageView hend;
         public TextView name;
         public TextView content;
+        public TextView time;
         public TextView expandOrCollapse;
+
 
         public TextHolder(View itemView) {
             super(itemView);
 //      绑定xml布局中的控件
+            time = itemView.findViewById(R.id.time_tv);
             hend = (ImageView) itemView.findViewById(R.id.tv_hend);
             name = (TextView) itemView.findViewById(R.id.tv_name);
             content = (TextView) itemView.findViewById(R.id.tv_content);
             expandOrCollapse = (TextView) itemView.findViewById(R.id.tv_expand_or_collapse);
+
         }
     }
 }

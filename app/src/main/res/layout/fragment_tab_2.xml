@@ -4,7 +4,14 @@
                 android:layout_height="match_parent"
     >
 
+    <ImageView
+        android:id="@+id/tv_top"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@mipmap/login"/>
+
     <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/tv_top"
         android:id="@+id/rv_text_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
