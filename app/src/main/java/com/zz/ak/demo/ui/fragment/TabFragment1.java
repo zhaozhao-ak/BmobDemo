@@ -79,7 +79,8 @@ public class TabFragment1 extends BaseFragment implements OnQuickSideBarTouchLis
         super.onActivityCreated(savedInstanceState);
         showloading();
         queryTool = new QueryTool(this.getContext(),this);
-        queryTool.queryObjects();
+        queryTool.queryAllPerson();
+        queryTool.queryAllPersonMsg();
     }
 
     @Override

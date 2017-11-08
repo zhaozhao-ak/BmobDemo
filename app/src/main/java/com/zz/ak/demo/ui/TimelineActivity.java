@@ -57,7 +57,7 @@ public class TimelineActivity extends BaseActivity implements TimeInterface {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void getData() {
         showloading();
-        queryTool.queryObjects();
+        queryTool.queryAllPerson();
 
         for (int i = 0; i < 15; i++) {
             //add the new row to the list

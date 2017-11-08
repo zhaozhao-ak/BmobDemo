@@ -12,6 +12,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="msg">在动作类影片中，只要发生混乱，那么绝对就有木仓战。现在的技术越来越发达，电影或电视中的特效也做的越来越逼真，演员们被木仓打中的效果也很形象，我们经常能看到被木仓打中的伤口血淋林的暴露在大屏幕中，。</string>
+
 
     <string-array name="bmob_list">
         <item>1. 用户管理</item>

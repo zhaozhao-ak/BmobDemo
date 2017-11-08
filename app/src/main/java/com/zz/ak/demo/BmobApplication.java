@@ -3,6 +3,7 @@ package com.zz.ak.demo;
 import android.app.Application;
 
 import com.zz.ak.demo.bean.Person;
+import com.zz.ak.demo.bean.PersonMsg;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ public class BmobApplication extends Application {
      */
     public static String APPID = "8b12dcc162977b2aab1b79f510b67e4c";
     public static List<Person> personList = new ArrayList<>();
+    public static List<PersonMsg> personMsgList = new ArrayList<>();
 
     @Override
     public void onCreate() {

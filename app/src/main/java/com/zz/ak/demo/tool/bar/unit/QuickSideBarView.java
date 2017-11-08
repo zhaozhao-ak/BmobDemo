@@ -70,7 +70,7 @@ public class QuickSideBarView extends View {
 
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        for (int i = 0; i < mLetters.size(); i++) {
+        for (int i = 0; i < mLetters.size()-1; i++) {
             mPaint.setColor(mTextColor);
 
             mPaint.setAntiAlias(true);

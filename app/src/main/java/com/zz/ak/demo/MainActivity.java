@@ -248,7 +248,7 @@ public class MainActivity extends BaseActivity implements TimeInterface {
             @Override
             public void onClick(View view) {
 
-                queryTool.queryObjects();
+                queryTool.queryAllPerson();
             }
         });
 
