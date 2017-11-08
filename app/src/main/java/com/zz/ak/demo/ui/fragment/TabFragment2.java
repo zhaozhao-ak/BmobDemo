@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,7 @@ import java.util.List;
  * Created by chengxi on 17/4/26.
  */
 public class TabFragment2 extends BaseFragment implements TimeInterface {
-
+    private String TAG = "TabFragment2";
     private Context mContext;
     private List<Person> personList = new ArrayList<>();
     private QueryTool queryTool;
@@ -50,7 +51,11 @@ public class TabFragment2 extends BaseFragment implements TimeInterface {
         textListAdapter = new TextListAdapter(this.getActivity(),null);
         mRvTextList.setLayoutManager(new LinearLayoutManager(mContext,LinearLayoutManager.VERTICAL,false));
         mRvTextList.setAdapter(textListAdapter);
-        setData();
+        try {
+            setData();
+        }catch (Exception e){
+            Log.e(TAG, "setData: ",e );
+        }
     }
 
     private void setData() {
@@ -71,7 +76,11 @@ public class TabFragment2 extends BaseFragment implements TimeInterface {
     public void getNewData() {
         closeloading();
         showToast("获取成功");
-        textListAdapter.upData(application.personMsgList);
+        try {
+            textListAdapter.upData(application.personMsgList);
+        }catch (Exception e){
+            Log.e(TAG, "getNewData: ",e );
+        }
     }
 
     //获取数据失败

@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ import java.util.List;
  * Created by chengxi on 17/4/26.
  */
 public class TabFragment1 extends BaseFragment implements OnQuickSideBarTouchListener,TimeInterface {
+    private String TAG = "TabFragment1";
 
     RecyclerView recyclerView;
     HashMap<String,Integer> letters = new HashMap<>();
@@ -132,10 +134,16 @@ public class TabFragment1 extends BaseFragment implements OnQuickSideBarTouchLis
     @Override
     public void getNewData() {
         closeloading();
-        BmobApplication application = new BmobApplication();
-        if (application.personList!=null && application.personList.size()>0){
-            setData(application.personList);
+
+        try {
+            BmobApplication application = new BmobApplication();
+            if (application.personList!=null && application.personList.size()>0){
+                setData(application.personList);
+            }
+        }catch (Exception e){
+            Log.e(TAG, "getNewData: ",e );
         }
+
         showToast("加载成功");
     }
     //获取数据失败
@@ -172,7 +180,7 @@ public class TabFragment1 extends BaseFragment implements OnQuickSideBarTouchLis
 
         @Override
         public long getHeaderId(int position) {
-            return getItem(position).getFirstLetter().charAt(0);
+            return getItem(position).getFirstLetter()==null?0:getItem(position).getFirstLetter().charAt(0);
         }
 
         @Override
