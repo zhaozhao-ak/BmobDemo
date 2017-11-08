@@ -16,6 +16,7 @@ public class Person extends BmobObject {
 
 	private String firstLetter;
 	private String state;
+	private String PersonId;
 
 
 
@@ -77,6 +78,12 @@ public class Person extends BmobObject {
 
 	public void setState(String state) {
 		this.state = state;
+	}
+	public String getPersonId() {
+		return PersonId;
+	}
+	public void setPersonId(String personId) {
+		PersonId = personId;
 	}
 
 

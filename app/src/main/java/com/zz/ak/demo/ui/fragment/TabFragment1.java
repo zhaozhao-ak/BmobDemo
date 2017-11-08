@@ -19,7 +19,7 @@ import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration;
 import com.zz.ak.demo.BmobApplication;
 import com.zz.ak.demo.R;
-import com.zz.ak.demo.bean.Person;
+import com.zz.ak.demo.bean._User;
 import com.zz.ak.demo.interfaceview.TimeInterface;
 import com.zz.ak.demo.tool.QueryTool;
 import com.zz.ak.demo.tool.bar.CityListAdapter;
@@ -110,12 +110,12 @@ public class TabFragment1 extends BaseFragment implements OnQuickSideBarTouchLis
     public void getAllPerson() {
 
     }
-    private void setData(List<Person> personList) {
+    private void setData(List<_User> personList) {
 
         ArrayList<String> customLetters = new ArrayList<>();
         letters = new HashMap<>();
         int position = 0;
-        for(Person person: personList){
+        for(_User person: personList){
             String letter = person.getFirstLetter();
             //如果没有这个key则加入并把位置也加入
             if(!letters.containsKey(letter)){
@@ -181,7 +181,7 @@ public class TabFragment1 extends BaseFragment implements OnQuickSideBarTouchLis
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
             TextView tv_name = (TextView) holder.itemView.findViewById(R.id.tv_name);
-            tv_name.setText(getItem(position).getName());
+            tv_name.setText(getItem(position).getUsername());
             ImageView iv_head = holder.itemView.findViewById(R.id.iv_head);
             iv_head.setImageDrawable(mContext.getResources().getDrawable(R.drawable.img_0));
             TextView add_msg = (TextView) holder.itemView.findViewById(R.id.add_msg);

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/yuanjiao_ball"
+    android:padding="15dp">
+
+    <LinearLayout
+        android:id="@+id/ll_head"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/elep_icon"/>
+
+        <TextView
+            android:text="张三"
+            android:gravity="center_vertical"
+            android:paddingLeft="15dp"
+            android:textSize="26sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_1"
+        android:layout_below="@+id/ll_head"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:paddingTop="10dip"
+        android:paddingBottom="10dip"
+        android:orientation="horizontal" >
+        <TextView
+            android:id="@+id/title"
+            android:text="填写标签："
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="8dip"
+            android:textSize="28sp"
+            />
+
+        <EditText
+            android:id="@+id/et_ball"
+            android:layout_width="match_parent"
+            android:singleLine="true"
+            android:layout_gravity="center_vertical"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <EditText
+        android:id="@+id/ev_shuo"
+        android:hint="请输入备注："
+        android:gravity="start"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/ll_1"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="#e1dede"/>
+
+    <LinearLayout
+        android:layout_below="@+id/ev_shuo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="12dp"
+        android:paddingBottom="10dp">
+        <Button
+            android:id="@+id/btn_off"
+            android:text="取消"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@drawable/yuanjiao_ball_left"/>
+        <Button
+            android:id="@+id/btn_ok"
+            android:text="确定"
+            android:layout_marginLeft="30dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@drawable/yuanjiao_ball_right"/>
+    </LinearLayout>
+
+</RelativeLayout>

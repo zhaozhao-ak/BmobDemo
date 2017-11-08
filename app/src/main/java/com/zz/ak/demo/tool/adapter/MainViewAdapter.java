@@ -24,6 +24,12 @@ public class MainViewAdapter extends BaseAdapter {
         this.fragmentArray = fragmentArray;
     }
 
+
+    public void remove() {
+        fragmentArray = null;
+    }
+
+
     @Override
     public int getCount() {
         return 3;

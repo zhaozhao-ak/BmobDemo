@@ -2,21 +2,23 @@ package com.zz.ak.demo;
 
 import android.app.Application;
 
-import com.zz.ak.demo.bean.Person;
 import com.zz.ak.demo.bean.PersonMsg;
+import com.zz.ak.demo.bean._User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.Bmob;
+import cn.bmob.v3.BmobUser;
 
 public class BmobApplication extends Application {
     /**
      * SDK初始化放到Application中
      */
     public static String APPID = "8b12dcc162977b2aab1b79f510b67e4c";
-    public static List<Person> personList = new ArrayList<>();
+    public static List<_User> personList = new ArrayList<>();
     public static List<PersonMsg> personMsgList = new ArrayList<>();
+    public static BmobUser myUser;
 
     @Override
     public void onCreate() {

@@ -4,8 +4,8 @@ import android.content.Context;
 import android.util.Log;
 
 import com.zz.ak.demo.BmobApplication;
-import com.zz.ak.demo.bean.Person;
 import com.zz.ak.demo.bean.PersonMsg;
+import com.zz.ak.demo.bean._User;
 import com.zz.ak.demo.interfaceview.TimeInterface;
 
 import java.util.List;
@@ -34,13 +34,13 @@ public class QueryTool {
      * 表：Person  更具最新更新时间
      */
     public void queryAllPerson(){
-        final BmobQuery<Person> bmobQuery = new BmobQuery<Person>();
+        final BmobQuery<_User> bmobQuery = new BmobQuery<_User>();
         bmobQuery.order("updatedAt");
         //先判断是否有缓存
         bmobQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);	// 如果没有缓存的话，则先从网络中取
 //		observable形式
-        bmobQuery.findObjectsObservable(Person.class)
-                .subscribe(new Subscriber<List<Person>>() {
+        bmobQuery.findObjectsObservable(_User.class)
+                .subscribe(new Subscriber<List<_User>>() {
                     @Override
                     public void onCompleted() {}
 
@@ -50,10 +50,10 @@ public class QueryTool {
                         timeInterface.getNewDataError();
                     }
                     @Override
-                    public void onNext(List<Person> persons) {
-                        log("zhao-----查询Person成功：共"+persons.size()+"条数据。");
+                    public void onNext(List<_User> user) {
+                        log("zhao-----查询Person成功：共"+user.size()+"条数据。");
                         BmobApplication application = new BmobApplication();
-                        application.personList = persons;
+                        application.personList = user;
                         System.out.println("zhao--666------");
                         timeInterface.getNewData();
                     }
@@ -120,6 +120,61 @@ public class QueryTool {
                         timeInterface.getNewData();
                     }
                 });
+    }
+
+
+    /**
+     * 获取所有信息
+     */
+    public void queryAllM(){
+
+        final BmobQuery<_User> bmobQuery = new BmobQuery<_User>();
+        bmobQuery.order("updatedAt");
+        //先判断是否有缓存
+        bmobQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);	// 如果没有缓存的话，则先从网络中取
+//		observable形式
+        bmobQuery.findObjectsObservable(_User.class)
+                .subscribe(new Subscriber<List<_User>>() {
+                    @Override
+                    public void onCompleted() {}
+
+                    @Override
+                    public void onError(Throwable e) {
+                        loge(e);
+                        timeInterface.getNewDataError();
+                    }
+                    @Override
+                    public void onNext(List<_User> user) {
+                        log("zhao-----查询Person成功：共"+user.size()+"条数据。");
+                        BmobApplication application = new BmobApplication();
+                        application.personList = user;
+                        System.out.println("zhao--666------");
+                    }
+                });
+
+        final BmobQuery<PersonMsg> bmobQuery1 = new BmobQuery<PersonMsg>();
+        bmobQuery1.order("-updatedAt");
+        //先判断是否有缓存
+        bmobQuery1.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);	// 如果没有缓存的话，则先从网络中取
+//		observable形式
+        bmobQuery1.findObjectsObservable(PersonMsg.class)
+                .subscribe(new Subscriber<List<PersonMsg>>() {
+                    @Override
+                    public void onCompleted() {}
+
+                    @Override
+                    public void onError(Throwable e) {
+                        loge(e);
+                        timeInterface.getNewDataError();
+                    }
+                    @Override
+                    public void onNext(List<PersonMsg> personMsgs) {
+                        log("zhao-----查询PersonMsg成功：共"+personMsgs.size()+"条数据。");
+                        BmobApplication application = new BmobApplication();
+                        application.personMsgList = personMsgs;
+                    }
+                });
+        timeInterface.getNewData();
     }
 
 
