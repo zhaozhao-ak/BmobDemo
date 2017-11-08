@@ -47,6 +47,7 @@ public class TabFragment1 extends BaseFragment implements OnQuickSideBarTouchLis
     CityListWithHeadersAdapter adapter;
     private QueryTool queryTool;
     private Context mContext;
+    private BmobApplication application;
 
     @Nullable
     @Override
@@ -72,24 +73,37 @@ public class TabFragment1 extends BaseFragment implements OnQuickSideBarTouchLis
 
         // Add decoration for dividers between list items
         recyclerView.addItemDecoration(new DividerDecoration(this.getContext()));
-
+        System.out.println("zhao--------执行--66666666------");
         return view;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        showloading();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        showloading();
+        System.out.println("zhao--------执行--------");
         queryTool = new QueryTool(this.getContext(),this);
-        queryTool.queryAllPerson();
-        queryTool.queryAllPersonMsg();
+        application = new BmobApplication();
+        setData();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-//        getAllPerson();
-//        setData();
+    }
+
+    private void setData() {
+        if (application.personList==null || application.personList.size()==0 ){
+            queryTool.queryAllPerson();
+            queryTool.queryAllPersonMsg();
+        }else {
+            setData(application.personList);
+        }
     }
 
     public void getAllPerson() {
@@ -98,7 +112,7 @@ public class TabFragment1 extends BaseFragment implements OnQuickSideBarTouchLis
     private void setData(List<Person> personList) {
 
         ArrayList<String> customLetters = new ArrayList<>();
-
+        letters = new HashMap<>();
         int position = 0;
         for(Person person: personList){
             String letter = person.getFirstLetter();

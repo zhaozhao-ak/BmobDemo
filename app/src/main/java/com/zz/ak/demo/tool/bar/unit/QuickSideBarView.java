@@ -120,7 +120,7 @@ public class QuickSideBarView extends View {
                 break;
             default:
                 if (oldChoose != newChoose) {
-                    if (newChoose >= 0 && newChoose < mLetters.size()) {
+                    if (newChoose >= 0 && newChoose < mLetters.size()-1) {
                         mChoose = newChoose;
                         if (listener != null) {
                             //计算位置
