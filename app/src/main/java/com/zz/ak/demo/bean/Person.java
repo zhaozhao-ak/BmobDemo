@@ -15,6 +15,9 @@ public class Person extends BmobObject {
 	private BmobDate uploadTime; //更新的最新时间
 
 	private String firstLetter;
+	private String state;
+
+
 
 	public BmobDate getUploadTime() {
 		return uploadTime;
@@ -67,6 +70,13 @@ public class Person extends BmobObject {
 	}
 	public void setFirstLetter(String firstLetter) {
 		this.firstLetter = firstLetter;
+	}
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 
 

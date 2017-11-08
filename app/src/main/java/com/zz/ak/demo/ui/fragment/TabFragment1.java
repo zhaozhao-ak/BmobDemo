@@ -1,14 +1,17 @@
 package com.zz.ak.demo.ui.fragment;
 
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter;
@@ -41,12 +44,13 @@ public class TabFragment1 extends BaseFragment implements OnQuickSideBarTouchLis
     QuickSideBarTipsView quickSideBarTipsView;
     CityListWithHeadersAdapter adapter;
     private QueryTool queryTool;
+    private Context mContext;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-       View view =  inflater.inflate(R.layout.fragment_tab_1, null);
+        mContext = this.getContext();
+        View view =  inflater.inflate(R.layout.fragment_tab_1, null);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         quickSideBarView = (QuickSideBarView) view.findViewById(R.id.quickSideBarView);
         quickSideBarTipsView = (QuickSideBarTipsView) view.findViewById(R.id.quickSideBarTipsView);
@@ -145,15 +149,24 @@ public class TabFragment1 extends BaseFragment implements OnQuickSideBarTouchLis
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.view_item, parent, false);
+                    .inflate(R.layout.person_item, parent, false);
             return new RecyclerView.ViewHolder(view) {
             };
         }
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-            TextView textView = (TextView) holder.itemView;
-            textView.setText(getItem(position).getName());
+            TextView tv_name = (TextView) holder.itemView.findViewById(R.id.tv_name);
+            tv_name.setText(getItem(position).getName());
+            ImageView iv_head = holder.itemView.findViewById(R.id.iv_head);
+            iv_head.setImageDrawable(mContext.getResources().getDrawable(R.drawable.img_0));
+            TextView add_msg = (TextView) holder.itemView.findViewById(R.id.add_msg);
+            if (TextUtils.isEmpty(getItem(position).getState()) ){
+                add_msg.setVisibility(View.GONE);
+            }else {
+                add_msg.setVisibility(View.VISIBLE);
+                add_msg.setText(getItem(position).getState());
+            }
         }
 
         @Override
