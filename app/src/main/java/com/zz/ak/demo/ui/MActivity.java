@@ -189,15 +189,18 @@ public class MActivity extends BaseActivity implements NavigationView.OnNavigati
                 if (!TextUtils.isEmpty(beizhu)) {
                     PersonMsg personMsg = new PersonMsg();
                     personMsg.setPersonMsg(beizhu);
+                    if (BmobApplication.UserMsg!=null && !TextUtils.isEmpty(BmobApplication.UserMsg.getPic().getFileUrl().toString())){
+                        personMsg.setPic(BmobApplication.UserMsg.getPic().getFileUrl().toString());
+                    }
                     personMsg.setName(BmobApplication.myUser.getUsername());
                     personMsg.setPersonId(BmobApplication.myUser.getObjectId());
                     addSubscription(personMsg.save(new SaveListener<String>() {
                         @Override
                         public void done(String s, BmobException e) {
                             if (e == null) {
-                                toast("修改成功" + s);
+                                toast("发表成功" + s);
                             } else {
-                                toast("修改失败");
+                                toast("发表失败");
                             }
                         }
                     }));

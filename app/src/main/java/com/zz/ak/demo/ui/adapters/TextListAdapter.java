@@ -2,6 +2,7 @@ package com.zz.ak.demo.ui.adapters;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.zz.ak.demo.R;
 import com.zz.ak.demo.bean.PersonMsg;
 
@@ -111,6 +113,16 @@ public class TextListAdapter extends RecyclerView.Adapter<TextListAdapter.TextHo
             holder.time.setText(personMsg.getUpdatedAt());//设置时间
         }
 
+        if (!TextUtils.isEmpty(personMsg.getPic())){
+            Glide.with(mContent).load(personMsg.getPic())
+                    .placeholder(R.mipmap.ic_cat) //设置占位图，在加载之前显示
+                    .error(R.mipmap.ic_cat) //在图像加载失败时显示
+                    .into(holder.hend);
+        }else {
+            Glide.with(mContent).load(R.mipmap.ic_cat)
+                    .error(R.mipmap.ic_cat) //在图像加载失败时显示
+                    .into(holder.hend);
+        }
 
 //    设置显示和收起的点击事件
         holder.expandOrCollapse.setOnClickListener(new View.OnClickListener() {

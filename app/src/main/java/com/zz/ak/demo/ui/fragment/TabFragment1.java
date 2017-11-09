@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration;
 import com.zz.ak.demo.BmobApplication;
@@ -182,16 +183,29 @@ public class TabFragment1 extends BaseFragment implements OnQuickSideBarTouchLis
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            _User user = getItem(position);
             TextView tv_name = (TextView) holder.itemView.findViewById(R.id.tv_name);
-            tv_name.setText(getItem(position).getUsername());
+            tv_name.setText(user.getUsername());
             ImageView iv_head = holder.itemView.findViewById(R.id.iv_head);
-            iv_head.setImageDrawable(mContext.getResources().getDrawable(R.drawable.img_0));
+//            iv_head.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.user));
+
+            if (getItem(position).getPic()!=null){
+                Glide.with(mContext).load(user.getPic().getFileUrl())
+                        .placeholder(R.mipmap.ic_cat) //设置占位图，在加载之前显示
+                        .error(R.mipmap.ic_cat) //在图像加载失败时显示
+                        .into(iv_head);
+            }else {
+                Glide.with(mContext).load(R.mipmap.ic_cat)
+                        .error(R.mipmap.ic_cat) //在图像加载失败时显示
+                        .into(iv_head);
+            }
+
             TextView add_msg = (TextView) holder.itemView.findViewById(R.id.add_msg);
-            if (TextUtils.isEmpty(getItem(position).getState()) ){
+            if (TextUtils.isEmpty(user.getState()) ){
                 add_msg.setVisibility(View.GONE);
             }else {
                 add_msg.setVisibility(View.VISIBLE);
-                add_msg.setText(getItem(position).getState());
+                add_msg.setText(user.getState());
             }
         }
 

@@ -11,6 +11,16 @@ public class PersonMsg extends BmobObject {
     private String PersonId;
     private String PersonMsg;
     private String name;
+    private String pic;   //头像
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
+    }
+
 
     public String getName() {
         return name;

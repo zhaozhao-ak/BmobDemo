@@ -55,6 +55,13 @@ public class QueryTool {
                         BmobApplication application = new BmobApplication();
                         application.personList = user;
                         System.out.println("zhao--666------");
+                        for (_User msg :user){
+                            String p = msg.getObjectId().toString().trim();
+                            String U = application.myUser.getObjectId().toString().trim();
+                            if (p.equals(U)){
+                                application.UserMsg = msg;
+                            }
+                        }
                         timeInterface.getNewData();
                     }
                 });

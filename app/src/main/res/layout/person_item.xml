@@ -8,8 +8,7 @@
     <ImageView
         android:id="@+id/iv_head"
         android:layout_width="30dp"
-        android:layout_height="match_parent"
-        android:src="@mipmap/ic_launcher_round"/>
+        android:layout_height="30dp"/>
 
     <TextView
         android:id="@+id/tv_name"
@@ -21,10 +20,11 @@
         android:text="山大王"/>
     <TextView
         android:id="@+id/add_msg"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:text=""
-        android:background="@drawable/ball_2"
+        android:padding="3dp"
+        android:background="@drawable/yuanjiao1"
         android:layout_marginRight="15dp"
         android:layout_centerHorizontal="true"
         android:gravity="center"
