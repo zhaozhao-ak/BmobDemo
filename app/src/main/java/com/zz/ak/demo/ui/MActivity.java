@@ -168,8 +168,8 @@ public class MActivity extends BaseActivity implements NavigationView.OnNavigati
         btnOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String biaoqian = et_ball.getText().toString();
-                String beizhu = ev_shuo.getText().toString();
+                final String biaoqian = et_ball.getText().toString();
+                final String beizhu = ev_shuo.getText().toString();
                 if (!TextUtils.isEmpty(biaoqian)) {
                     String userId = BmobApplication.myUser.getObjectId();
                     final _User user = new _User();
@@ -189,7 +189,7 @@ public class MActivity extends BaseActivity implements NavigationView.OnNavigati
                 if (!TextUtils.isEmpty(beizhu)) {
                     PersonMsg personMsg = new PersonMsg();
                     personMsg.setPersonMsg(beizhu);
-                    if (BmobApplication.UserMsg!=null && !TextUtils.isEmpty(BmobApplication.UserMsg.getPic().getFileUrl().toString())){
+                    if (BmobApplication.UserMsg!=null && BmobApplication.UserMsg.getPic()!=null && !TextUtils.isEmpty(BmobApplication.UserMsg.getPic().getFileUrl().toString())){
                         personMsg.setPic(BmobApplication.UserMsg.getPic().getFileUrl().toString());
                     }
                     personMsg.setName(BmobApplication.myUser.getUsername());
@@ -208,9 +208,15 @@ public class MActivity extends BaseActivity implements NavigationView.OnNavigati
                 dialog.dismiss();
                 if (!TextUtils.isEmpty(biaoqian) || !TextUtils.isEmpty(beizhu)){
                     showloading();
+                    try {
+                        Thread.currentThread().sleep(2000);//阻断1秒
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     queryTool.queryAllPerson();
                     queryTool.queryAllPersonMsg();
                 }
+
             }
         });
 

@@ -11,10 +11,14 @@ import android.widget.Toast;
 import com.zz.ak.demo.bean.Person;
 import com.zz.ak.demo.tool.LoadingDialog;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.v3.BmobRealTimeData;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.ValueEventListener;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
@@ -44,6 +48,29 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        final BmobRealTimeData rtd = new BmobRealTimeData();
+        rtd.start(new ValueEventListener() {
+            @Override
+            public void onDataChange(JSONObject data) {
+                Log.d("zhao---bmob", "("+data.optString("action")+")"+"数据："+data);
+
+            }
+            @Override
+            public void onConnectCompleted(Exception ex) {
+                Log.d("bmob", "连接成功:"+rtd.isConnected());
+                // 监听表更新
+                rtd.subTableUpdate("_User");
+                rtd.subTableUpdate("PersonMsg");
+
+                // 监听表删除
+//                rtd.subTableDelete("PersonMsg");
+                // 监听行更新
+//                rtd.subRowUpdate("", "_User");
+//                // 监听行删除
+//                rtd.subRowDelete("", "PersonMsg");
+            }
+        });
     }
 
     public void toast(String msg) {
