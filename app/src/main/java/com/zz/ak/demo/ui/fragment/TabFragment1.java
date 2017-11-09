@@ -32,6 +32,7 @@ import com.zz.ak.demo.ui.BaseFragment;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by chengxi on 17/4/26.
@@ -110,11 +111,13 @@ public class TabFragment1 extends BaseFragment implements OnQuickSideBarTouchLis
 
     }
     public void setListData() {
-
+        List<_User> userList = new ArrayList<>();
+        userList = setUserData(application.personList);
         ArrayList<String> customLetters = new ArrayList<>();
+        letters.clear();
         letters = new HashMap<>();
         int position = 0;
-        for(_User person: application.personList){
+        for(_User person: userList){
             String letter = person.getFirstLetter();
             //如果没有这个key则加入并把位置也加入
             if(!letters.containsKey(letter)){
@@ -126,7 +129,7 @@ public class TabFragment1 extends BaseFragment implements OnQuickSideBarTouchLis
 
         //不自定义则默认26个字母
         quickSideBarView.setLetters(customLetters);
-        adapter.addAll(application.personList);
+        adapter.addAll(userList);
     }
 
     @Override
@@ -152,7 +155,7 @@ public class TabFragment1 extends BaseFragment implements OnQuickSideBarTouchLis
         try {
             BmobApplication application = new BmobApplication();
             if (application.personList!=null && application.personList.size()>0){
-                setData();
+                setListData();
             }
         }catch (Exception e){
             Log.e(TAG, "getNewData: ",e );
@@ -220,4 +223,173 @@ public class TabFragment1 extends BaseFragment implements OnQuickSideBarTouchLis
         }
 
     }
+
+
+
+    private List<_User> setUserData(List<_User> userInfos){
+        List<_User>  machienUser = new ArrayList<>();
+
+        List<_User> listUserA = new ArrayList<>();
+        List<_User> listUserB = new ArrayList<>();
+        List<_User> listUserC = new ArrayList<>();
+        List<_User> listUserD = new ArrayList<>();
+        List<_User> listUserE = new ArrayList<>();
+        List<_User> listUserF = new ArrayList<>();
+        List<_User> listUserG = new ArrayList<>();
+        List<_User> listUserH = new ArrayList<>();
+        List<_User> listUserI = new ArrayList<>();
+        List<_User> listUserJ = new ArrayList<>();
+        List<_User> listUserK = new ArrayList<>();
+        List<_User> listUserL = new ArrayList<>();
+        List<_User> listUserM = new ArrayList<>();
+        List<_User> listUserN = new ArrayList<>();
+        List<_User> listUserO = new ArrayList<>();
+        List<_User> listUserP = new ArrayList<>();
+        List<_User> listUserQ = new ArrayList<>();
+        List<_User> listUserR = new ArrayList<>();
+        List<_User> listUserS = new ArrayList<>();
+        List<_User> listUserT = new ArrayList<>();
+        List<_User> listUserU = new ArrayList<>();
+        List<_User> listUserV = new ArrayList<>();
+        List<_User> listUserW = new ArrayList<>();
+        List<_User> listUserX = new ArrayList<>();
+        List<_User> listUserY = new ArrayList<>();
+        List<_User> listUserZ = new ArrayList<>();
+
+        for (_User user: userInfos){
+            if (user.getFirstLetter().equalsIgnoreCase("A")){
+                listUserA.add(user);
+            }if (user.getFirstLetter().equalsIgnoreCase("B")){
+                listUserB.add(user);
+            }if (user.getFirstLetter().equalsIgnoreCase("C")){
+                listUserC.add(user);
+            }if (user.getFirstLetter().equalsIgnoreCase("D")){
+                listUserD.add(user);
+            }if (user.getFirstLetter().equalsIgnoreCase("E")){
+                listUserE.add(user);
+            }if (user.getFirstLetter().equalsIgnoreCase("F")){
+                listUserF.add(user);
+            }if (user.getFirstLetter().equalsIgnoreCase("G")){
+                listUserG.add(user);
+            }if (user.getFirstLetter().equalsIgnoreCase("H")){
+                listUserH.add(user);
+            }if (user.getFirstLetter().equalsIgnoreCase("I")){
+                listUserI.add(user);
+            }if (user.getFirstLetter().equalsIgnoreCase("J")){
+                listUserJ.add(user);
+            }if (user.getFirstLetter().equalsIgnoreCase("K")){
+                listUserK.add(user);
+            }if (user.getFirstLetter().equalsIgnoreCase("L")){
+                listUserL.add(user);
+            }if (user.getFirstLetter().equalsIgnoreCase("M")){
+                listUserM.add(user);
+            }if (user.getFirstLetter().equalsIgnoreCase("N")){
+                listUserN.add(user);
+            }if (user.getFirstLetter().equalsIgnoreCase("O")){
+                listUserO.add(user);
+            }if (user.getFirstLetter().equalsIgnoreCase("P")){
+                listUserP.add(user);
+            }if (user.getFirstLetter().equalsIgnoreCase("Q")){
+                listUserQ.add(user);
+            }if (user.getFirstLetter().equalsIgnoreCase("R")){
+                listUserR.add(user);
+            }if (user.getFirstLetter().equalsIgnoreCase("S")){
+                listUserS.add(user);
+            }if (user.getFirstLetter().equalsIgnoreCase("T")){
+                listUserT.add(user);
+            }if (user.getFirstLetter().equalsIgnoreCase("U")){
+                listUserU.add(user);
+            }if (user.getFirstLetter().equalsIgnoreCase("V")){
+                listUserV.add(user);
+            }if (user.getFirstLetter().equalsIgnoreCase("W")){
+                listUserW.add(user);
+            }if (user.getFirstLetter().equalsIgnoreCase("X")){
+                listUserX.add(user);
+            }if (user.getFirstLetter().equalsIgnoreCase("Y")){
+                listUserY.add(user);
+            }if (user.getFirstLetter().equalsIgnoreCase("Z")){
+                listUserZ.add(user);
+            }
+        }
+        if (listUserA.size()>0){
+            machienUser.addAll(listUserA);
+        }if (listUserB.size()>0){
+            machienUser.addAll(listUserB);
+        }if (listUserC.size()>0){
+            machienUser.addAll(listUserC);
+
+        }if (listUserD.size()>0){
+            machienUser.addAll(listUserD);
+
+        }if (listUserE.size()>0){
+            machienUser.addAll(listUserE);
+
+        }if (listUserF.size()>0){
+            machienUser.addAll(listUserF);
+
+        }if (listUserG.size()>0){
+            machienUser.addAll(listUserG);
+
+        }if (listUserH.size()>0){
+            machienUser.addAll(listUserH);
+
+        }if (listUserI.size()>0){
+            machienUser.addAll(listUserI);
+
+        }if (listUserJ.size()>0){
+            machienUser.addAll(listUserJ);
+
+        }if (listUserK.size()>0){
+            machienUser.addAll(listUserK);
+
+        }if (listUserL.size()>0){
+            machienUser.addAll(listUserL);
+
+        }if (listUserM.size()>0){
+            machienUser.addAll(listUserM);
+
+        }if (listUserN.size()>0){
+            machienUser.addAll(listUserN);
+
+        }if (listUserO.size()>0){
+            machienUser.addAll(listUserO);
+
+        }if (listUserP.size()>0) {
+            machienUser.addAll(listUserP);
+
+        }if (listUserQ.size()>0){
+            machienUser.addAll(listUserQ);
+
+        }if (listUserR.size()>0){
+            machienUser.addAll(listUserR);
+
+        }if (listUserS.size()>0){
+            machienUser.addAll(listUserS);
+
+        }if (listUserT.size()>0){
+            machienUser.addAll(listUserT);
+
+        }if (listUserU.size()>0){
+            machienUser.addAll(listUserU);
+
+        }if (listUserV.size()>0){
+            machienUser.addAll(listUserV);
+
+        }if (listUserW.size()>0){
+            machienUser.addAll(listUserW);
+
+        }if (listUserX.size()>0){
+            machienUser.addAll(listUserX);
+
+        }if (listUserY.size()>0){
+            machienUser.addAll(listUserY);
+
+        }if (listUserZ.size()>0){
+            machienUser.addAll(listUserZ);
+
+        }
+
+        return machienUser;
+    }
+
 }

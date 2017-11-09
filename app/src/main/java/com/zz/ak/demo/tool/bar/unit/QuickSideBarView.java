@@ -13,6 +13,7 @@ import android.view.View;
 import com.zz.ak.demo.R;
 import com.zz.ak.demo.tool.bar.unit.listener.OnQuickSideBarTouchListener;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -165,7 +166,8 @@ public class QuickSideBarView extends View {
      * @param letters
      */
     public void setLetters(List<String> letters) {
-        this.mLetters = letters;
+        this.mLetters = new ArrayList<>();
+        this.mLetters.addAll(letters);
         invalidate();
     }
 }
