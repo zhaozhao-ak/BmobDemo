@@ -44,6 +44,9 @@ public class MActivity extends BaseActivity implements NavigationView.OnNavigati
     private Context mContext;
     private MainViewAdapter mainViewAdapter;
     private TabContainerView tabContainerView;
+    private TabFragment1 fragment1;
+    private TabFragment2 fragment2;
+    private TabFragment3 fragment3;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,9 +76,12 @@ public class MActivity extends BaseActivity implements NavigationView.OnNavigati
         navigationView.setNavigationItemSelectedListener(this);
 
         //内容区
+        fragment1 = new TabFragment1();
+        fragment2 = new TabFragment2();
+        fragment3 = new TabFragment3();
         tabContainerView = (TabContainerView) findViewById(R.id.tab_container);
         mainViewAdapter=new MainViewAdapter(getSupportFragmentManager(),
-                new Fragment[] {new TabFragment1(), new TabFragment2(),new TabFragment3()});
+                new Fragment[] {fragment1, fragment2,fragment3});
         mainViewAdapter.setHasMsgIndex(3);
         tabContainerView.setAdapter(mainViewAdapter);
         tabContainerView.setOnTabSelectedListener(new OnTabSelectedListener() {
@@ -221,10 +227,9 @@ public class MActivity extends BaseActivity implements NavigationView.OnNavigati
     public void getNewData() {
         closeloading();
         //刷新Fragment
-        mainViewAdapter.remove();
-        mainViewAdapter=new MainViewAdapter(getSupportFragmentManager(),
-                new Fragment[] {new TabFragment1(), new TabFragment2(),new TabFragment3()});
-        tabContainerView.setAdapter(mainViewAdapter);
+        fragment1.setData();
+        fragment2.setData();
+
     }
 
     @Override

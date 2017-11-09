@@ -58,7 +58,7 @@ public class TabFragment2 extends BaseFragment implements TimeInterface {
         }
     }
 
-    private void setData() {
+    public void setData() {
         if (application.personMsgList!=null && application.personMsgList.size()>0){
             textListAdapter.upData(application.personMsgList);
         }else {

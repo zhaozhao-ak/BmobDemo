@@ -32,7 +32,6 @@ import com.zz.ak.demo.ui.BaseFragment;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by chengxi on 17/4/26.
@@ -97,25 +96,25 @@ public class TabFragment1 extends BaseFragment implements OnQuickSideBarTouchLis
         super.onResume();
     }
 
-    private void setData() {
+    public void setData() {
         if (application.personList==null || application.personList.size()==0 ){
             showloading();
             queryTool.queryAllPerson();
             queryTool.queryAllPersonMsg();
         }else {
-            setData(application.personList);
+            setListData();
         }
     }
 
     public void getAllPerson() {
 
     }
-    private void setData(List<_User> personList) {
+    public void setListData() {
 
         ArrayList<String> customLetters = new ArrayList<>();
         letters = new HashMap<>();
         int position = 0;
-        for(_User person: personList){
+        for(_User person: application.personList){
             String letter = person.getFirstLetter();
             //如果没有这个key则加入并把位置也加入
             if(!letters.containsKey(letter)){
@@ -127,7 +126,7 @@ public class TabFragment1 extends BaseFragment implements OnQuickSideBarTouchLis
 
         //不自定义则默认26个字母
         quickSideBarView.setLetters(customLetters);
-        adapter.addAll(personList);
+        adapter.addAll(application.personList);
     }
 
     @Override
@@ -153,7 +152,7 @@ public class TabFragment1 extends BaseFragment implements OnQuickSideBarTouchLis
         try {
             BmobApplication application = new BmobApplication();
             if (application.personList!=null && application.personList.size()>0){
-                setData(application.personList);
+                setData();
             }
         }catch (Exception e){
             Log.e(TAG, "getNewData: ",e );
