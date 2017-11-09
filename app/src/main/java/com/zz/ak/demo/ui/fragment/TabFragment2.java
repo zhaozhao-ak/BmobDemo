@@ -49,8 +49,11 @@ public class TabFragment2 extends BaseFragment implements TimeInterface {
         queryTool = new QueryTool(this.getContext(),this);
         application = new BmobApplication();
         textListAdapter = new TextListAdapter(this.getActivity(),null);
+
+
         mRvTextList.setLayoutManager(new LinearLayoutManager(mContext,LinearLayoutManager.VERTICAL,false));
         mRvTextList.setAdapter(textListAdapter);
+        mRvTextList.setNestedScrollingEnabled(false);
         try {
             setData();
         }catch (Exception e){
