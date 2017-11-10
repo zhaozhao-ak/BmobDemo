@@ -5,8 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal"
+        android:background="#0bacf7">
+
+        <TextView
+            android:text="Left先生"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"
+        android:layout_below="@+id/top"
         android:layout_above="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
