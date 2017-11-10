@@ -76,6 +76,7 @@ public class QueryTool {
     public void queryAllPersonMsg(){
         final BmobQuery<PersonMsg> bmobQuery = new BmobQuery<PersonMsg>();
         bmobQuery.order("-updatedAt");
+        bmobQuery.setLimit(50);
         //先判断是否有缓存
         bmobQuery.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);	// 如果没有缓存的话，则先从网络中取
 //		observable形式

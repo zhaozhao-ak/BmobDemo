@@ -197,7 +197,6 @@ public class MainActivity extends BaseActivity implements TimeInterface {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if(action.equals(ACTION_NAME)){
-                showToast("处理action名字相对应的广播");
                 closeloading();
                 //刷新Fragment
                 adapter.notifyDataSetChanged();
