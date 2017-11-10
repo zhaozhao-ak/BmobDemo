@@ -42,7 +42,8 @@
         <activity android:name=".ui.MActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".ui.MainActivity_New"/>
+        <activity android:name=".ui.MainActivity_New"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
