@@ -3,6 +3,7 @@ package com.zz.ak.demo.ui;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.text.Editable;
@@ -128,10 +129,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 @Override
                 public void onNext(BmobUser bmobUser) {
                     closeloading();
+                    SharedPreferences userSettings = getSharedPreferences("userInfo", 0);
+                    SharedPreferences.Editor editor = userSettings.edit();
+                    editor.putString("user",et_name.getText().toString());
+                    editor.putString("password",et_password.getText().toString());
+                    editor.commit();
                     BmobApplication.myUser = bmobUser;
                     toast(bmobUser.getUsername() + "登陆成功");
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
+                    finish();
                 }
             });
         }else {

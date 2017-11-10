@@ -1,28 +1,61 @@
 package com.zz.ak.demo.ui.mainfragment;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.zz.ak.demo.R;
+import com.zz.ak.demo.interfaceview.TimeInterface;
+import com.zz.ak.demo.tool.QueryTool;
+import com.zz.ak.demo.ui.BaseFragment;
+import com.zz.ak.demo.ui.LoginActivity;
 
 /**
  * Created by RJYX on 2017/11/10.
  */
 
-public class Fragment_me extends Fragment {
+public class Fragment_me extends BaseFragment implements TimeInterface {
     TextView textView;
     private String mText;
+    Button btn_tuiChu,btn_shuaXin;
+    private QueryTool queryTool;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_me, container, false);
+        btn_tuiChu = view.findViewById(R.id.btn_tuiChu);
+        btn_shuaXin= view.findViewById(R.id.btn_shuaXin);
+        btn_tuiChu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences sp = getActivity().getSharedPreferences("userInfo", 0);
+                SharedPreferences.Editor editor = sp.edit();
+                editor.remove("user");
+                editor.remove("password");
+                editor.commit();
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+
+            }
+        });
+
+        btn_tuiChu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showloading();
+                queryTool.queryAllPerson();
+                queryTool.queryAllPersonMsg();
+            }
+        });
         return view;
     }
 
@@ -37,6 +70,7 @@ public class Fragment_me extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        queryTool = new QueryTool(this.getContext(),this);
     }
 
     @Override
@@ -64,4 +98,17 @@ public class Fragment_me extends Fragment {
     }
 
 
+    @Override
+    public void getNewData() {
+        closeloading();
+        showToast("获取成功");
+
+    }
+
+    @Override
+    public void getNewDataError() {
+        closeloading();
+        showToast("获取失败");
+
+    }
 }
