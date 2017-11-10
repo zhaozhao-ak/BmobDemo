@@ -48,7 +48,7 @@ public class Fragment_me extends BaseFragment implements TimeInterface {
             }
         });
 
-        btn_tuiChu.setOnClickListener(new View.OnClickListener() {
+        btn_shuaXin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showloading();
@@ -101,14 +101,14 @@ public class Fragment_me extends BaseFragment implements TimeInterface {
     @Override
     public void getNewData() {
         closeloading();
-        showToast("获取成功");
+        showToast("刷新成功");
 
     }
 
     @Override
     public void getNewDataError() {
         closeloading();
-        showToast("获取失败");
+        showToast("刷新失败");
 
     }
 }
