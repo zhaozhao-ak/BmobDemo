@@ -1,19 +1,18 @@
 package com.zz.ak.demo.ui;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -21,43 +20,77 @@ import android.widget.EditText;
 
 import com.zz.ak.demo.BaseActivity;
 import com.zz.ak.demo.BmobApplication;
-import com.zz.ak.demo.MainActivity;
 import com.zz.ak.demo.R;
 import com.zz.ak.demo.bean.PersonMsg;
 import com.zz.ak.demo.bean._User;
 import com.zz.ak.demo.interfaceview.TimeInterface;
 import com.zz.ak.demo.tool.QueryTool;
-import com.zz.ak.demo.tool.adapter.MainViewAdapter;
-import com.zz.ak.demo.tool.listener.OnTabSelectedListener;
-import com.zz.ak.demo.tool.widget.Tab;
-import com.zz.ak.demo.tool.widget.TabContainerView;
-import com.zz.ak.demo.ui.fragment.TabFragment1;
-import com.zz.ak.demo.ui.fragment.TabFragment2;
-import com.zz.ak.demo.ui.fragment.TabFragment3;
+import com.zz.ak.demo.ui.mainfragment.FragmentVPAdapter;
+import com.zz.ak.demo.ui.mainfragment.Fragment_New;
+import com.zz.ak.demo.ui.mainfragment.Fragment_User;
+import com.zz.ak.demo.ui.mainfragment.Fragment_me;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 
-public class MActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener,TimeInterface {
+public class MainActivity extends BaseActivity implements TimeInterface {
+
+    private ViewPager mViewPager;
+    FragmentVPAdapter adapter;
+    private MenuItem menuItem;
+    BottomNavigationView navigation;
+
     private QueryTool queryTool;
     private Context mContext;
-    private MainViewAdapter mainViewAdapter;
-    private TabContainerView tabContainerView;
-    private TabFragment1 fragment1;
-    private TabFragment2 fragment2;
-    private TabFragment3 fragment3;
+    private final String ACTION_NAME = "MainActivity_New_Up";
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    mViewPager.setCurrentItem(0);
+                    break;
+                case R.id.navigation_dashboard:
+                    mViewPager.setCurrentItem(1);
+                    break;
+                case R.id.navigation_notifications:
+                    mViewPager.setCurrentItem(2);
+                    break;
+            }
+            return false;
+        }
+    };
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_container);
+        setContentView(R.layout.activity_main_new);
         mContext = this;
-        queryTool = new QueryTool(mContext,this);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
+        queryTool = new QueryTool(mContext,this);
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        mViewPager = (ViewPager) findViewById(R.id.viewPager);
 
+
+        List<Fragment> fragmentList = new ArrayList<>();
+        Fragment_User fragmentOne = Fragment_User.newInstance();
+        Fragment_New fragmentTwo = Fragment_New.newInstance();
+        Fragment_me fragmentThree = Fragment_me.newInstance();
+        fragmentList.add(fragmentOne);
+        fragmentList.add(fragmentTwo);
+        fragmentList.add(fragmentThree);
+
+        adapter = new FragmentVPAdapter(getSupportFragmentManager(),fragmentList);
+        mViewPager.setAdapter(adapter);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,89 +98,28 @@ public class MActivity extends BaseActivity implements NavigationView.OnNavigati
                 showPasswordSetDailog();
             }
         });
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        //内容区
-        fragment1 = new TabFragment1();
-        fragment2 = new TabFragment2();
-        fragment3 = new TabFragment3();
-        tabContainerView = (TabContainerView) findViewById(R.id.tab_container);
-        mainViewAdapter=new MainViewAdapter(getSupportFragmentManager(),
-                new Fragment[] {fragment1, fragment2,fragment3});
-        mainViewAdapter.setHasMsgIndex(3);
-        tabContainerView.setAdapter(mainViewAdapter);
-        tabContainerView.setOnTabSelectedListener(new OnTabSelectedListener() {
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onTabSelected(Tab tab) {
-
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+            @Override
+            public void onPageSelected(int position) {
+                if (menuItem != null) {
+                    menuItem.setChecked(false);
+                } else {
+                    navigation.getMenu().getItem(0).setChecked(false);
+                }
+                menuItem = navigation.getMenu().getItem(position);
+                menuItem.setChecked(true);
+            }
+            @Override
+            public void onPageScrollStateChanged(int state) {
             }
         });
-    }
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
+        //注册广播
+        registerBoradcastReceiver();
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Intent intent = new Intent(MActivity.this, MainActivity.class);
-            startActivity(intent);
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 
     private void showPasswordSetDailog() {
@@ -206,17 +178,6 @@ public class MActivity extends BaseActivity implements NavigationView.OnNavigati
                     }));
                 }
                 dialog.dismiss();
-                if (!TextUtils.isEmpty(biaoqian) || !TextUtils.isEmpty(beizhu)){
-                    showloading();
-                    try {
-                        Thread.currentThread().sleep(2000);//阻断1秒
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    queryTool.queryAllPerson();
-                    queryTool.queryAllPersonMsg();
-                }
-
             }
         });
 
@@ -231,18 +192,38 @@ public class MActivity extends BaseActivity implements NavigationView.OnNavigati
         dialog.show();
     }
 
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver(){
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if(action.equals(ACTION_NAME)){
+                showToast("处理action名字相对应的广播");
+                closeloading();
+                //刷新Fragment
+                adapter.notifyDataSetChanged();
+            }
+        }
+
+    };
+
+    public void registerBoradcastReceiver(){
+        IntentFilter myIntentFilter = new IntentFilter();
+        myIntentFilter.addAction(ACTION_NAME);
+        //注册广播
+        registerReceiver(mBroadcastReceiver, myIntentFilter);
+    }
+
 
     @Override
     public void getNewData() {
         closeloading();
         //刷新Fragment
-        fragment1.setData();
-        fragment2.setData();
-
+        adapter.notifyDataSetChanged();
     }
 
     @Override
     public void getNewDataError() {
         closeloading();
     }
+
 }

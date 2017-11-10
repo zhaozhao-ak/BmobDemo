@@ -3,17 +3,17 @@
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@mipmap/new_life_icon_grey"
+        android:icon="@drawable/cat1"
         android:title="主面" />
 
     <item
         android:id="@+id/navigation_dashboard"
-        android:icon="@mipmap/new_find_icon_grey"
+        android:icon="@drawable/cat2"
         android:title="最新" />
 
     <item
         android:id="@+id/navigation_notifications"
-        android:icon="@mipmap/new_myhome_icon_grey"
+        android:icon="@drawable/cat3"
         android:title="我的" />
 
 </menu>
