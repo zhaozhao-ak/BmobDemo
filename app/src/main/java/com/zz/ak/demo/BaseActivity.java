@@ -1,5 +1,6 @@
 package com.zz.ak.demo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -9,7 +10,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.zz.ak.demo.bean.Person;
+import com.zz.ak.demo.interfaceview.TimeInterface;
 import com.zz.ak.demo.tool.LoadingDialog;
+import com.zz.ak.demo.tool.QueryTool;
 
 import org.json.JSONObject;
 
@@ -22,13 +25,14 @@ import cn.bmob.v3.listener.ValueEventListener;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity implements TimeInterface {
 
     public static String TAG = "zhao--BaseActivity";
     protected ListView mListview;
     protected BaseAdapter mAdapter;
 
     private CompositeSubscription mCompositeSubscription;
+    private QueryTool queryTool;
 
     public static LoadingDialog loadingdialog;
     public static List<Person> personList = new ArrayList<>();
@@ -48,13 +52,14 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        queryTool = new QueryTool(this.getApplicationContext(),this);
         final BmobRealTimeData rtd = new BmobRealTimeData();
         rtd.start(new ValueEventListener() {
             @Override
             public void onDataChange(JSONObject data) {
                 Log.d("zhao---bmob", "("+data.optString("action")+")"+"数据："+data);
-
+                queryTool.queryAllPerson();
+                queryTool.queryAllPersonMsg();
             }
             @Override
             public void onConnectCompleted(Exception ex) {
@@ -134,5 +139,18 @@ public class BaseActivity extends AppCompatActivity {
         if (loadingdialog!=null){
             loadingdialog.dismiss();
         }
+    }
+
+    @Override
+    public void getNewData() {
+        Intent mIntent = new Intent("MainActivity_New_Up");
+        //发送广播
+        sendBroadcast(mIntent);
+
+    }
+
+    @Override
+    public void getNewDataError() {
+
     }
 }

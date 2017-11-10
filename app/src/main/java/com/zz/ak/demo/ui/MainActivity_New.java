@@ -1,7 +1,10 @@
 package com.zz.ak.demo.ui;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -43,6 +46,7 @@ public class MainActivity_New extends BaseActivity implements TimeInterface {
 
     private QueryTool queryTool;
     private Context mContext;
+    private final String ACTION_NAME = "MainActivity_New_Up";
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -113,6 +117,9 @@ public class MainActivity_New extends BaseActivity implements TimeInterface {
             }
         });
 
+        //注册广播
+        registerBoradcastReceiver();
+
     }
 
     private void showPasswordSetDailog() {
@@ -171,17 +178,6 @@ public class MainActivity_New extends BaseActivity implements TimeInterface {
                     }));
                 }
                 dialog.dismiss();
-                if (!TextUtils.isEmpty(biaoqian) || !TextUtils.isEmpty(beizhu)){
-                    showloading();
-                    try {
-                        Thread.currentThread().sleep(2000);//阻断1秒
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    queryTool.queryAllPerson();
-                    queryTool.queryAllPersonMsg();
-                }
-
             }
         });
 
@@ -194,6 +190,27 @@ public class MainActivity_New extends BaseActivity implements TimeInterface {
         });
 
         dialog.show();
+    }
+
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver(){
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if(action.equals(ACTION_NAME)){
+                showToast("处理action名字相对应的广播");
+                closeloading();
+                //刷新Fragment
+                adapter.notifyDataSetChanged();
+            }
+        }
+
+    };
+
+    public void registerBoradcastReceiver(){
+        IntentFilter myIntentFilter = new IntentFilter();
+        myIntentFilter.addAction(ACTION_NAME);
+        //注册广播
+        registerReceiver(mBroadcastReceiver, myIntentFilter);
     }
 
 
