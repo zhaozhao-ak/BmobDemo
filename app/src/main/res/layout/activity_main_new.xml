@@ -8,18 +8,18 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:popupTheme="@style/AppTheme.PopupOverlay" >
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:layout_gravity="center">
+
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center"
             android:gravity="center"
-            android:text="lft先生"
-            android:textColor="@android:color/white"
-            android:textSize="20sp" />
+            android:text="Left先生"
+            android:textColor="@color/border_bkg"
+            android:textSize="22sp" />
     </android.support.v7.widget.Toolbar>
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"
