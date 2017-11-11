@@ -13,11 +13,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.zz.ak.demo.BmobApplication;
 import com.zz.ak.demo.R;
 import com.zz.ak.demo.bean.PersonMsg;
@@ -133,6 +137,24 @@ public class MainActivity extends BaseActivity implements TimeInterface {
                 .findViewById(R.id.et_ball);
         final EditText ev_shuo = (EditText) view
                 .findViewById(R.id.ev_shuo);
+        ImageView dialog_head = view.findViewById(R.id.dialog_head);
+        TextView dialog_name = view.findViewById(R.id.dialog_name);
+
+        try {
+            dialog_name.setText(BmobApplication.UserMsg.getUsername());
+            if (BmobApplication.UserMsg!=null && BmobApplication.UserMsg.getPic()!=null && !TextUtils.isEmpty(BmobApplication.UserMsg.getPic().getFileUrl().toString())){
+                Glide.with(mContext).load(BmobApplication.UserMsg.getPic().getFileUrl())
+                        .placeholder(R.mipmap.ic_cat) //设置占位图，在加载之前显示
+                        .error(R.mipmap.ic_cat) //在图像加载失败时显示
+                        .into(dialog_head);
+            }else {
+                Glide.with(mContext).load(R.mipmap.ic_cat)
+                        .error(R.mipmap.ic_cat) //在图像加载失败时显示
+                        .into(dialog_head);
+            }
+        }catch (Exception e){
+            Log.d(TAG,e.getMessage());
+        }
 
         Button btnOK = (Button) view.findViewById(R.id.btn_ok);
         Button btnCancel = (Button) view.findViewById(R.id.btn_off);

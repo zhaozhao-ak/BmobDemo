@@ -14,14 +14,17 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
         <ImageView
+            android:id="@+id/dialog_head"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@mipmap/elep_icon"/>
 
         <TextView
-            android:text="张三"
+            android:id="@+id/dialog_name"
+            android:text=""
             android:gravity="center_vertical"
             android:paddingLeft="15dp"
+            android:textColor="@color/colorPrimary"
             android:textSize="26sp"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

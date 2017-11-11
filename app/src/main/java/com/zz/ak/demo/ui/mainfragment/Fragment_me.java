@@ -11,11 +11,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.zz.ak.demo.BmobApplication;
 import com.zz.ak.demo.R;
+import com.zz.ak.demo.bean._User;
 import com.zz.ak.demo.interfaceview.TimeInterface;
 import com.zz.ak.demo.tool.QueryTool;
 import com.zz.ak.demo.ui.BaseFragment;
 import com.zz.ak.demo.ui.LoginActivity;
+
+import cn.bmob.v3.BmobUser;
 
 /**
  * Created by RJYX on 2017/11/10.
@@ -41,6 +45,11 @@ public class Fragment_me extends BaseFragment implements TimeInterface {
                 editor.remove("user");
                 editor.remove("password");
                 editor.commit();
+                BmobApplication.UpNum = 0;
+                BmobApplication.myUser = new BmobUser();
+                BmobApplication.UserMsg = new _User();
+                BmobApplication.personList.clear();
+                BmobApplication.personMsgList.clear();
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
                 getActivity().finish();
