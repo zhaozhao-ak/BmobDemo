@@ -149,9 +149,9 @@ public class MainActivity extends BaseActivity implements TimeInterface {
                         @Override
                         public void done(BmobException e) {
                             if(e==null){
-                                toast("成功更新标签:"+user.getUpdatedAt());
+                                toast("更新成功:");
                             }else{
-                                toast("标签更新失败：" + e.getMessage());
+                                toast("更新失败：");
                             }
                         }
 
@@ -169,9 +169,9 @@ public class MainActivity extends BaseActivity implements TimeInterface {
                         @Override
                         public void done(String s, BmobException e) {
                             if (e == null) {
-                                toast("发表成功" + s);
+                                toast("发布成功" + s);
                             } else {
-                                toast("发表失败");
+                                toast("发布失败");
                             }
                         }
                     }));
