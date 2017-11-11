@@ -21,7 +21,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.zz.ak.demo.BaseActivity;
 import com.zz.ak.demo.BmobApplication;
 import com.zz.ak.demo.R;
 import com.zz.ak.demo.view.DrawableTextView;

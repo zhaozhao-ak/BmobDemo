@@ -18,7 +18,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.zz.ak.demo.BaseActivity;
 import com.zz.ak.demo.BmobApplication;
 import com.zz.ak.demo.R;
 import com.zz.ak.demo.bean.PersonMsg;
@@ -178,6 +177,9 @@ public class MainActivity extends BaseActivity implements TimeInterface {
                     }));
                 }
                 dialog.dismiss();
+                if (!TextUtils.isEmpty(biaoqian) || !TextUtils.isEmpty(beizhu)) {
+                    showloading();
+                }
             }
         });
 

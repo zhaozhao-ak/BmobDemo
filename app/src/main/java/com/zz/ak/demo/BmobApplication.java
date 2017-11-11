@@ -20,6 +20,7 @@ public class BmobApplication extends Application {
     public static List<PersonMsg> personMsgList = new ArrayList<>();
     public static BmobUser myUser;
     public static _User UserMsg;
+    public static int UpNum = 0;
 
     @Override
     public void onCreate() {

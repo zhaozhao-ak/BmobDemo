@@ -1,4 +1,4 @@
-package com.zz.ak.demo;
+package com.zz.ak.demo.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.zz.ak.demo.BmobApplication;
 import com.zz.ak.demo.bean.Person;
 import com.zz.ak.demo.interfaceview.TimeInterface;
 import com.zz.ak.demo.tool.LoadingDialog;
@@ -36,7 +37,7 @@ public class BaseActivity extends AppCompatActivity implements TimeInterface {
 
     public static LoadingDialog loadingdialog;
     public static List<Person> personList = new ArrayList<>();
-
+    private int upUnm = 0;
     /**
      * 解决Subscription内存泄露问题
      *
@@ -58,8 +59,15 @@ public class BaseActivity extends AppCompatActivity implements TimeInterface {
             @Override
             public void onDataChange(JSONObject data) {
                 Log.d("zhao---bmob", "("+data.optString("action")+")"+"数据："+data);
-                queryTool.queryAllPerson();
-                queryTool.queryAllPersonMsg();
+                BmobApplication.UpNum++;
+                Log.d("BmobApplication.UpNum", "-----------:"+BmobApplication.UpNum);
+                if (BmobApplication.UpNum >=3){
+                    Log.d("UpNum", "-----3333333333333------:");
+                    queryTool.queryAllPerson();
+                    queryTool.queryAllPersonMsg();
+                    BmobApplication.UpNum = 0;
+                }
+
             }
             @Override
             public void onConnectCompleted(Exception ex) {
@@ -76,6 +84,14 @@ public class BaseActivity extends AppCompatActivity implements TimeInterface {
 //                rtd.subRowDelete("", "PersonMsg");
             }
         });
+    }
+    private void getQueryTool(){
+        upUnm++;
+        if (upUnm ==3){
+            queryTool.queryAllPerson();
+            queryTool.queryAllPersonMsg();
+            upUnm = 0;
+        }
     }
 
     public void toast(String msg) {
@@ -131,7 +147,7 @@ public class BaseActivity extends AppCompatActivity implements TimeInterface {
     public void showloading() {
         loadingdialog = new LoadingDialog(BaseActivity.this);
         loadingdialog.setCanceledOnTouchOutside(false);
-        loadingdialog.setCancelable(false);
+        loadingdialog.setCancelable(true);
         loadingdialog.show();
     }
 

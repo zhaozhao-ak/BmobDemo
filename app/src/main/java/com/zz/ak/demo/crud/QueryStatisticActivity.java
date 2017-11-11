@@ -2,7 +2,7 @@ package com.zz.ak.demo.crud;
 
 import android.os.Bundle;
 
-import com.zz.ak.demo.BaseActivity;
+import com.zz.ak.demo.ui.BaseActivity;
 
 
 public class QueryStatisticActivity extends BaseActivity {

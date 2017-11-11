@@ -34,6 +34,7 @@ public class QueryTool {
      * 表：Person  更具最新更新时间
      */
     public void queryAllPerson(){
+        System.out.println("zhao--yyyyyyyyyyyy------");
         final BmobQuery<_User> bmobQuery = new BmobQuery<_User>();
         bmobQuery.order("updatedAt");
         //先判断是否有缓存

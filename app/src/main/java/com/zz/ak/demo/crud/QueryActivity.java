@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
-import com.zz.ak.demo.BaseActivity;
 import com.zz.ak.demo.bean.BankCard;
 import com.zz.ak.demo.bean.Person;
+import com.zz.ak.demo.ui.BaseActivity;
 
 import org.json.JSONObject;
 

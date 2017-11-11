@@ -7,9 +7,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.zz.ak.demo.BaseActivity;
 import com.zz.ak.demo.R;
 import com.zz.ak.demo.bean.Person;
+import com.zz.ak.demo.ui.BaseActivity;
 
 import cn.bmob.v3.BmobACL;
 import cn.bmob.v3.BmobRole;
